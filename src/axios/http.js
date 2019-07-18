@@ -4,9 +4,21 @@
   */
  import axios from 'axios';
  import router from '../router';
- import store from '../store/index';
+ import store from '../store/index.js';
+ import qs from 'qs'; // 根据需求是否导入qs模块
 //  import { Toast } from 'vant';
  
+/**
+  * 提示函数
+  * 禁止点击蒙层、显示一秒后关闭
+  */
+//  const tip = msg => {
+//     Toast({
+//         message: msg,
+//         duration: 1000,
+//         forbidClick: true
+//     });
+// }
 
  /**
    * 跳转登录页
@@ -35,7 +47,7 @@
          // 403 token过期
          // 清除token并跳转登录页
          case 403:
-             tip('登录过期，请重新登录');
+            //  tip('登录过期，请重新登录');
              localStorage.removeItem('token');
              store.commit('loginSuccess', null);
              setTimeout(() => {
@@ -44,7 +56,8 @@
              break;
          // 404请求不存在
          case 404:
-             tip('请求的资源不存在');
+            //  tip('请求的资源不存在');
+             console.log(2)
              break;
          default:
              console.log(other);
@@ -53,7 +66,7 @@
  // 创建axios实例
  var instance = axios.create({    timeout: 1000 * 10});
  // 设置post请求头
- instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
  /**
    * 请求拦截器
    * 每次请求前，如果存在token则在请求头中携带token
@@ -66,6 +79,12 @@
          // 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。
          const token = store.state.token;
          token && (config.headers.Authorization = token);
+         //将post的参数格式化；
+         console.log(config.method)
+         if (config.method === 'post') {
+             console.log(555555555)
+            config.data = qs.stringify(config.data)
+          }      
          return config;
      },
      error => Promise.error(error))
@@ -86,7 +105,7 @@
              // eg:请求超时或断网时，更新state的network状态
              // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
              // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
-             store.commit('changeNetwork', false);
+            //  store.commit('changeNetwork', false);
          }
      });
  

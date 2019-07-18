@@ -3,8 +3,10 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-import store from './store/store';
+import store from './store/index';
+import axios from './axios/index.js';
 
+Vue.prototype.$api = axios;
 Vue.config.productionTip = false;
 
 

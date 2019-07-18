@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from '../axios/index.js';
 
 Vue.use(Vuex);
 
@@ -43,6 +44,15 @@ export default new Vuex.Store({
      * Action 可以包含任意异步操作;
      */
     actions:{
-
+        textAct(){
+            axios.article.articleList().then(res=>{
+                console.log(res.data)
+            })
+        },
+        textPostAct(context,obj){
+            axios.article.textPost(obj).then(res=>{
+                // console.log(res.data)
+            })
+        }
     }
 })

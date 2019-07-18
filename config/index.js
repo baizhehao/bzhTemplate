@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-       '/reg': {
-        target: 'localhost:3000',
-        changeOrigin:true,
-        pathRewrite: {
-          '^/reg': ''
-        }
-      }
+      //  '/text': {
+      //   target: 'http://localhost:3000',
+      //   changeOrigin:true,
+      //   pathRewrite: {
+      //     '^/text': ''
+      //   }
+      // }
     },
 
     // Various Dev Server settings  各种开发服务器设置
