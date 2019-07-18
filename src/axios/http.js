@@ -80,9 +80,7 @@
          const token = store.state.token;
          token && (config.headers.Authorization = token);
          //将post的参数格式化；
-         console.log(config.method)
          if (config.method === 'post') {
-             console.log(555555555)
             config.data = qs.stringify(config.data)
           }      
          return config;
